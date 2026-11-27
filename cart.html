@@ -66,7 +66,7 @@ function draw(){
    return `<div class="citem he" data-id="${it.id}">${box3d(it)}
     <div><h3>HIGH-END · ${n}/12</h3>${n<12?`<p class="warn">${T('Коробка не заполнена: нужно ровно 12 конфет.','The box is not full: exactly 12 candies are needed.','Quti to‘lmagan: aynan 12 ta konfet kerak.')} <a class="link" href="/high-end#build">${T('Дополнить','Complete it','To‘ldirish')}</a></p>`:''}<p>${T('Коробка','Box','Quti')}: ${T(...col)}</p><p>${Object.entries(cnt).map(([k,v])=>NM[k]+' × '+v).join(', ')}</p>${it.name?`<p>${T('Письмо для','Letter for','Maktub')}: ${it.name.replace(/[<>&]/g,'')}</p>`:''}<button class="x" type="button" data-rm>${T('Убрать','Remove','Olib tashlash')}</button></div>
     <div class="qty"><button type="button" data-q="-1">−</button><span>${it.qty}</span><button type="button" data-q="1">+</button></div></div>`}
-  return `<div class="citem" data-id="${it.id}"><div class="th" style="background:#f1efea"><img src="/media/ls-box.webp?v=5" alt=""></div>
+  return `<div class="citem" data-id="${it.id}"><div class="th" style="background:#f1efea"><img src="/media/ls-inside.webp" alt=""></div>
    <div><h3>LIGHT SIDE OF THE MOON</h3><p>${T('Белая коробка: тёмная карамель, солёная карамель, макадамия','White box: dark caramel, salted caramel, macadamia','Oq quti: qora karamel, tuzli karamel, makadamiya')}</p><button class="x" type="button" data-rm>${T('Убрать','Remove','Olib tashlash')}</button></div>
    <div class="qty"><button type="button" data-q="-1">−</button><span>${it.qty}</span><button type="button" data-q="1">+</button></div></div>`}).join('');
  init3d();

@@ -10,21 +10,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
-<link rel="preload" as="image" href="/media/ls-box.webp?v=5">
+<link rel="preload" as="image" href="/media/ls-box.webp?v=6">
 </head>
 <body data-page="lsm">
 <main>
  <header class="phead wrap center">
   <p class="kicker" data-en="New collection" data-uz="Yangi to‘plam">Новая коллекция</p>
   <h1 class="big serif" style="font-size:clamp(44px,7.4vw,104px);letter-spacing:.04em">LIGHT SIDE OF THE MOON</h1>
-  <p class="sub" data-en="Three new flavours in one white box — round, square and a bar, each in its own foil." data-uz="Bitta oq qutida uchta yangi ta’m — dumaloq, kvadrat va batoncha, har biri o‘z folgasida.">Три новых вкуса в одной белой коробке — круглая, квадратная и батончик, каждая в своей фольге.</p>
+  <p class="sub" data-en="19 chocolates and three new flavours in one white box — rounds, squares and bars, each in its own foil." data-uz="Bitta oq qutida uchta yangi ta’m — dumaloq, kvadrat va batoncha, har biri o‘z folgasida.">19 конфет и три новых вкуса в одной белой коробке — круглые, квадратные и батончики, каждая в своей фольге.</p>
  </header>
 
  <section class="wrap">
-  <figure class="lsbox rv" style="margin-left:0;margin-right:0">
-   <div class="lid"><img src="/assets/logo-word-dark.png" alt="DONA"><p>MOMENTS TO SHARE<br>FLAVORS TO REMEMBER</p></div>
-   <div class="tray"><img src="/media/ls-box.webp?v=5" width="3468" height="2118" alt="Коробка LIGHT SIDE OF THE MOON с конфетами: квадратные в золотой фольге, круглые в фиолетовой и батончики в серебряной" data-en-alt="LIGHT SIDE OF THE MOON box with gold square, violet round and silver bar candies"></div>
-  </figure>
+  <div class="lsduo">
+   <figure class="rv">
+    <div class="turn" id="turn" role="img" aria-label="3D-макет белой коробки LIGHT SIDE OF THE MOON"><img id="turn-img" src="/media/lsbox/05.webp" alt="" draggable="false"></div>
+    <figcaption data-en="The box · drag to turn" data-uz="Quti · aylantirish uchun torting">Коробка · потяните, чтобы повернуть</figcaption>
+   </figure>
+   <figure class="rv">
+    <img class="inside" src="/media/ls-inside.webp" width="1200" height="896" alt="Внутри коробки 19 конфет: 6 квадратных в золотой фольге, 8 круглых в фиолетовой и 5 серебряных батончиков" data-en-alt="Inside: 19 chocolates — 6 gold squares, 8 violet rounds and 5 silver bars" loading="lazy">
+    <figcaption data-en="Inside: 19 chocolates — 6 + 8 + 5" data-uz="Ichida: 19 ta konfet — 6 + 8 + 5">Внутри 19 конфет: 6 + 8 + 5</figcaption>
+   </figure>
+  </div>
   <div class="buy rv">
    <div class="qty" role="group" aria-label="Количество"><button type="button" id="qm">−</button><span id="qv">1</span><button type="button" id="qp">+</button></div>
    <button class="btn gold" type="button" id="b-add" data-en="Add box to cart" data-uz="Qutini savatga qo‘shish">Добавить коробку в корзину</button>
@@ -51,7 +57,7 @@ const LS=[
  {k:'macadamia_bar',c:'#cfd3d8',ru:['Макадамия','Батончик · серебряная фольга'],en:['Macadamia','Bar · silver foil'],uz:['Makadamiya','Batoncha · kumush folga']}
 ];
 $('#lsrow').innerHTML=LS.map(x=>`<div class="lsc rv" style="--c:${x.c}" tabindex="0">
- <div class="pic"><img class="top" src="/media/ls-top-${x.k}.webp?v=5" alt="" loading="lazy"><img class="side" src="/media/ls-side-${x.k}.webp?v=5" alt="" loading="lazy"></div>
+ <div class="pic"><img class="top" src="/media/ls-top-${x.k}.webp?v=6" alt="" loading="lazy"><img class="side" src="/media/ls-side-${x.k}.webp?v=6" alt="" loading="lazy"></div>
  <h3 data-en="${x.en[0]}" data-uz="${x.uz[0]}">${x.ru[0]}</h3>
  <p data-en="${x.en[1]}" data-uz="${x.uz[1]}">${x.ru[1]}</p>
 </div>`).join('');
@@ -59,6 +65,13 @@ $$('.lsc').forEach(c=>{c.onclick=()=>c.classList.toggle('flip');c.onkeydown=e=>{
 let q=1;const qv=$('#qv');
 $("#qm").onclick=()=>{q=Math.max(1,q-1);qv.textContent=q};
 $("#qp").onclick=()=>{q=Math.min(50,q+1);qv.textContent=q};
+(function(){const t=$('#turn'),im=$('#turn-img'),n=36,src=i=>`/media/lsbox/${String(i).padStart(2,'0')}.webp`;
+ for(let i=0;i<n;i++){const p=new Image();p.src=src(i)}
+ let f=5,drag=0,x=0,acc=0,idle=0;const set=()=>{im.src=src(((Math.round(f)%n)+n)%n)};
+ t.addEventListener('pointerdown',e=>{drag=1;x=e.clientX;t.setPointerCapture(e.pointerId)});
+ t.addEventListener('pointermove',e=>{if(!drag)return;f-=(e.clientX-x)/12;x=e.clientX;set()});
+ const up=()=>{drag=0;idle=performance.now()};t.addEventListener('pointerup',up);t.addEventListener('pointercancel',up);
+ if(!D.reduce)setInterval(()=>{if(!drag&&performance.now()-idle>2500){f+=1;set()}},140)})();
 $('#b-add').onclick=()=>{D.cart.add({type:'lsm',qty:q});
  D.toast(`<span data-en="Added to cart" data-uz="Savatga qo‘shildi">Добавлено в корзину</span> <a href="/cart" data-en="Open cart →" data-uz="Savatni ochish →">Открыть корзину →</a>`);q=1;qv.textContent=q};
 })();
