@@ -23,8 +23,9 @@
  <section class="wrap">
   <div class="lsduo">
    <figure class="rv">
-    <div class="turn" id="turn" role="img" aria-label="3D-макет белой коробки LIGHT SIDE OF THE MOON"><img id="turn-img" src="/media/lsbox/05.webp" alt="" draggable="false"></div>
+    <div class="turn" id="turn" role="img" aria-label="3D-макет белой коробки LIGHT SIDE OF THE MOON"><img id="turn-img" src="/media/lsbox/05.webp?v=8" alt="" draggable="false"></div>
     <figcaption data-en="The box · drag to turn" data-uz="Quti · aylantirish uchun torting">Коробка · потяните, чтобы повернуть</figcaption>
+    <button class="btn ghost flipb" type="button" id="flip" data-en="Turn over: back side" data-uz="Ag‘darish: orqa tomoni">Перевернуть: задняя сторона</button>
    </figure>
    <figure class="rv">
     <img class="inside" src="/media/ls-inside.webp" width="1200" height="896" alt="Внутри коробки 19 конфет: 6 квадратных в золотой фольге, 8 круглых в фиолетовой и 5 серебряных батончиков" data-en-alt="Inside: 19 chocolates — 6 gold squares, 8 violet rounds and 5 silver bars" loading="lazy">
@@ -50,7 +51,7 @@
 <script src="/js/site.js"></script>
 <script>
 (function(){
-const D=window.DONA,{$,$$}=D;
+const D=window.DONA,{$,$$,T}=D;
 const LS=[
  {k:'dark_caramel',c:'#7f7ae0',ru:['Тёмная карамель','Круглая · фиолетовая фольга'],en:['Dark Caramel','Round · violet foil'],uz:['Qora karamel','Dumaloq · binafsha folga']},
  {k:'salted_caramel',c:'#e6b54a',ru:['Солёная карамель','Квадратная · золотая фольга'],en:['Salted Caramel','Square · gold foil'],uz:['Tuzli karamel','Kvadrat · oltin folga']},
@@ -65,8 +66,9 @@ $$('.lsc').forEach(c=>{c.onclick=()=>c.classList.toggle('flip');c.onkeydown=e=>{
 let q=1;const qv=$('#qv');
 $("#qm").onclick=()=>{q=Math.max(1,q-1);qv.textContent=q};
 $("#qp").onclick=()=>{q=Math.min(50,q+1);qv.textContent=q};
-(function(){const t=$('#turn'),im=$('#turn-img'),n=36,src=i=>`/media/lsbox/${String(i).padStart(2,'0')}.webp`;
- for(let i=0;i<n;i++){const p=new Image();p.src=src(i)}
+(function(){const t=$('#turn'),im=$('#turn-img'),n=36;let dir='lsbox';const src=i=>`/media/${dir}/${String(i).padStart(2,'0')}.webp?v=8`;
+ for(const d of ['lsbox','lsbox-b'])for(let i=0;i<n;i++){const p=new Image();p.src=`/media/${d}/${String(i).padStart(2,'0')}.webp?v=8`}
+ $('#flip').onclick=()=>{dir=dir==='lsbox'?'lsbox-b':'lsbox';$('#flip').textContent=dir==='lsbox'?T('Перевернуть: задняя сторона','Turn over: back side','Ag‘darish: orqa tomoni'):T('Перевернуть: лицевая сторона','Turn over: front side','Ag‘darish: old tomoni');set()};
  let f=5,drag=0,x=0,acc=0,idle=0;const set=()=>{im.src=src(((Math.round(f)%n)+n)%n)};
  t.addEventListener('pointerdown',e=>{drag=1;x=e.clientX;t.setPointerCapture(e.pointerId)});
  t.addEventListener('pointermove',e=>{if(!drag)return;f-=(e.clientX-x)/12;x=e.clientX;set()});

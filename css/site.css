@@ -290,3 +290,4 @@ footer .credit{flex-basis:100%;margin:0;font-size:12px}
 #mvbox{width:min(100%,720px);height:min(70vw,460px);margin:20px auto 0;display:block;background:transparent}
 .lsturn{cursor:grab;touch-action:pan-y;user-select:none;display:grid;place-items:center}
 .lsturn img{width:100%;height:auto;pointer-events:none;filter:drop-shadow(0 16px 18px rgba(0,0,0,.5))}
+.flipb{margin-top:12px;min-height:40px;padding:8px 18px;font-size:14px}
