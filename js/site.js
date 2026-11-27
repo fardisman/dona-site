@@ -92,6 +92,22 @@ function paintBG() {
  const gr = ctx.createLinearGradient(0, 0, 0, Hh); gr.addColorStop(0, 'rgba(18,8,3,.42)'); gr.addColorStop(1, 'rgba(18,8,3,.62)'); ctx.fillStyle = gr; ctx.fillRect(0, 0, W, Hh);
 }
 paintBG(); let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(paintBG, 250); });
+/* flowing brushstrokes over the painted night (as in the first sketches) */
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+ const LOWP = (navigator.hardwareConcurrency || 4) <= 4 || innerWidth < 700;
+ const cv = document.createElement('canvas'); cv.id = 'flow'; cv.setAttribute('aria-hidden', 'true'); paint.after(cv);
+ const ctx = cv.getContext('2d'); let W, Hh, d, P = [], VV;
+ const V = () => [[.82,.2,.17],[.16,.72,.2],[.58,.9,.14],[.34,.18,.1]].map(([x,y,R]) => [x*W, y*Hh, R*Math.max(W,Hh)]);
+ const field = (x,y) => { let a = Math.sin(x*.0021/d + y*.0013/d)*1.3 + Math.cos(y*.0027/d - x*.0009/d)*1.1; for (const [vx,vy,R] of VV) { const dx=x-vx, dy=y-vy, w=Math.exp(-(dx*dx+dy*dy)/(R*R)); if (w>.02) a = a*(1-w) + (Math.atan2(dy,dx)+Math.PI/2+.25)*w } return a };
+ const cols = ['#fbefdc','#f0d3a8','#dfa96a','#b06d3a','#7b4422'];
+ const spawn = p => { p.x=Math.random()*W; p.y=Math.random()*Hh; p.life=60+Math.random()*120; p.c=cols[Math.floor(Math.random()*cols.length)]; p.w=(1.5+Math.random()*2.2)*d; return p };
+ const size = () => { d=1; W=cv.width=Math.round(innerWidth*d); Hh=cv.height=Math.round(innerHeight*d); VV=V(); P=Array.from({length:Math.round(innerWidth*innerHeight/(LOWP?9000:5200))},()=>spawn({})) };
+ size(); addEventListener('resize', size);
+ let vis = true; document.addEventListener('visibilitychange', () => vis = !document.hidden);
+ let odd = 0; (function tick(){ if (vis && (!LOWP || (odd ^= 1))) { ctx.globalCompositeOperation='destination-out'; ctx.fillStyle='rgba(0,0,0,.08)'; ctx.fillRect(0,0,W,Hh); ctx.globalCompositeOperation='source-over'; ctx.lineCap='round';
+  for (const p of P) { const a=field(p.x,p.y), nx=p.x+Math.cos(a)*1.6*d, ny=p.y+Math.sin(a)*1.6*d; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(nx,ny); ctx.strokeStyle=p.c; ctx.globalAlpha=Math.min(1,p.life/40)*.75; ctx.lineWidth=p.w; ctx.stroke(); p.x=nx; p.y=ny; if (--p.life<0||nx<0||ny<0||nx>W||ny>Hh) spawn(p) } ctx.globalAlpha=1 }
+  requestAnimationFrame(tick) })();
+}
 
 /* ---------- music: Debussy, faded in and out ---------- */
 const TRACK = 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/be/Clair_de_lune_%28Claude_Debussy%29_Suite_bergamasque.ogg/Clair_de_lune_%28Claude_Debussy%29_Suite_bergamasque.ogg.mp3';

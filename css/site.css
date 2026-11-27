@@ -291,3 +291,5 @@ footer .credit{flex-basis:100%;margin:0;font-size:12px}
 .lsturn{cursor:grab;touch-action:pan-y;user-select:none;display:grid;place-items:center}
 .lsturn img{width:100%;height:auto;pointer-events:none;filter:drop-shadow(0 16px 18px rgba(0,0,0,.5))}
 .flipb{margin-top:12px;min-height:40px;padding:8px 18px;font-size:14px}
+#flow{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.line .pic img{filter:drop-shadow(0 22px 22px rgba(0,0,0,.55))}.line.lsm .pic img{border-radius:0}.line .pic{padding:28px 28px 12px}
