@@ -247,10 +247,11 @@ footer .credit{flex-basis:100%;margin:0;font-size:12px}
 .line .pic{aspect-ratio:4/3;padding:14px 14px 0}
 .line .pic img{width:100%;height:100%;max-height:none;object-fit:contain}
 .line.lsm .pic img{border-radius:10px;filter:drop-shadow(0 18px 24px rgba(0,0,0,.5))}
-.views{width:min(100%,400px);margin-inline:auto}
+.views{width:min(100%,240px);margin-inline:auto}
 .cut3d img{position:absolute;inset:7% 5%;width:90%;height:86%;object-fit:contain;filter:drop-shadow(0 18px 20px rgba(0,0,0,.55))}
 .lsc .pic{width:58%;margin:0 auto}
-@media(max-width:820px){.lsc .pic{width:48%}.views{width:min(100%,340px)}}
+@media(max-width:820px){.lsc .pic{width:48%}.views{width:min(100%,200px)}}
+.vstage{border-radius:20px}.vtabs button{padding:7px 14px;font-size:13px}
 .citem.he{grid-template-columns:240px minmax(0,1fr) auto}
 .citem .warn{color:#ff9f82}
 .sc{position:relative;height:200px;perspective:820px;touch-action:none;cursor:grab;display:grid;place-items:center;border-radius:14px;background:radial-gradient(ellipse at 50% 60%,rgba(255,220,180,.07),transparent 70%)}
@@ -267,3 +268,9 @@ footer .credit{flex-basis:100%;margin:0;font-size:12px}
 .cb .wl.rt{width:135px;transform:translateX(180px) rotateZ(90deg) rotateX(90deg);background:var(--w2)}
 .hint3{position:absolute;left:0;right:0;bottom:0;margin:0;text-align:center;font-size:11px;color:var(--mute);pointer-events:none}
 @media(max-width:700px){.citem.he{grid-template-columns:1fr}.citem.he .qty{justify-self:start}}
+/* closed box in cart */
+.cb .lidtop{position:absolute;inset:0;background:var(--bg);transform:translateZ(26px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.cb .lidtop .lm{width:58%;aspect-ratio:1442/237;background:linear-gradient(100deg,#8e4a22,#d9915a 35%,#ffd9a8 50%,#c9773d 65%,#8e4a22);-webkit-mask:url(../assets/logo-word.webp) center/contain no-repeat;mask:url(../assets/logo-word.webp) center/contain no-repeat}
+.cb .lidtop.red .lm{background:#fff4ea}.cb .lidtop.white .lm{background:linear-gradient(100deg,#7a3c1a,#b66d3a 40%,#e0a46c 50%,#a85d2c 60%,#7a3c1a)}
+.cb .lidtop p{margin:0;font-size:5.5px;letter-spacing:.18em;line-height:1.5;text-align:center;color:var(--ink)}
+.cb .wl{height:26px}
