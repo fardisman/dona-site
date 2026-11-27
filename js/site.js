@@ -128,7 +128,7 @@ function spins() {
  $$('.spin[data-k]').forEach(el => {
   if (el._v) return; el._v = 1;
   const k = el.dataset.k, s = el.dataset.size === 'l' ? '' : '-s';
-  el.innerHTML = `<img src="/media/still-${k}.webp" alt="" decoding="async">`;
+  el.innerHTML = `<img src="/media/still-${k}.webp?v=3" alt="" decoding="async">`;
   if (reduce) return;
   const v = document.createElement('video');
   v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'none'; v.setAttribute('aria-hidden', 'true');

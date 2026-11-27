@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
-<link rel="preload" as="image" href="/media/ls-box.webp">
+<link rel="preload" as="image" href="/media/ls-box.webp?v=3">
 </head>
 <body data-page="lsm">
 <main>
@@ -23,7 +23,7 @@
  <section class="wrap">
   <figure class="lsbox rv" style="margin-left:0;margin-right:0">
    <div class="lid"><img src="/assets/logo-word-dark.png" alt="DONA"><p>MOMENTS TO SHARE<br>FLAVORS TO REMEMBER</p></div>
-   <div class="tray"><img src="/media/ls-box.webp" width="3200" height="2080" alt="Коробка LIGHT SIDE OF THE MOON с конфетами: квадратные в золотой фольге, круглые в фиолетовой и батончики в серебряной" data-en-alt="LIGHT SIDE OF THE MOON box with gold square, violet round and silver bar candies"></div>
+   <div class="tray"><img src="/media/ls-box.webp?v=3" width="3200" height="2080" alt="Коробка LIGHT SIDE OF THE MOON с конфетами: квадратные в золотой фольге, круглые в фиолетовой и батончики в серебряной" data-en-alt="LIGHT SIDE OF THE MOON box with gold square, violet round and silver bar candies"></div>
   </figure>
   <div class="buy rv">
    <div class="qty" role="group" aria-label="Количество"><button type="button" id="qm">−</button><span id="qv">1</span><button type="button" id="qp">+</button></div>
@@ -51,7 +51,7 @@ const LS=[
  {k:'macadamia_bar',c:'#cfd3d8',ru:['Макадамия','Батончик · серебряная фольга'],en:['Macadamia','Bar · silver foil'],uz:['Makadamiya','Batoncha · kumush folga']}
 ];
 $('#lsrow').innerHTML=LS.map(x=>`<div class="lsc rv" style="--c:${x.c}" tabindex="0">
- <div class="pic"><img class="top" src="/media/ls-top-${x.k}.webp" alt="" loading="lazy"><img class="side" src="/media/ls-side-${x.k}.webp" alt="" loading="lazy"></div>
+ <div class="pic"><img class="top" src="/media/ls-top-${x.k}.webp?v=3" alt="" loading="lazy"><img class="side" src="/media/ls-side-${x.k}.webp?v=3" alt="" loading="lazy"></div>
  <h3 data-en="${x.en[0]}" data-uz="${x.uz[0]}">${x.ru[0]}</h3>
  <p data-en="${x.en[1]}" data-uz="${x.uz[1]}">${x.ru[1]}</p>
 </div>`).join('');
