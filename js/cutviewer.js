@@ -48,7 +48,10 @@ async function fetchGz(url, onp) {
  const r = await fetch(url); if (!r.ok) throw new Error('load ' + r.status);
  const total = +r.headers.get('content-length') || 0; let got = 0;
  const counted = r.body.pipeThrough(new TransformStream({transform(ch, c) { got += ch.byteLength; total && onp && onp(got / total); c.enqueue(ch); }}));
- return new Response(counted.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+ const raw = await new Response(counted).arrayBuffer(), u8 = new Uint8Array(raw, 0, 2);
+ // the host may already have un-gzipped it on the way (Content-Encoding)
+ if (u8[0] !== 0x1f || u8[1] !== 0x8b) return raw;
+ return new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
 }
 
 class CutViewer {
