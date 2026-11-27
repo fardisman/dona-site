@@ -29,7 +29,7 @@
     <p class="sub" data-en="We created a box in which you feel every chocolate before you taste it." data-uz="Biz shunday quti yaratdik — unda har bir konfetni tatib ko‘rishingizdan oldin his qilasiz.">Мы создали коробку, в которой вы ощутите каждую конфету ещё до того, как её попробуете.</p>
     <p class="sub" data-en="We use physics: magnets hold every chocolate in its place, so that it reaches your table exactly as we first imagined it." data-uz="Biz fizikadan foydalanamiz: magnitlar har bir konfetni o‘z joyida ushlab turadi — u dasturxoningizga biz o‘ylagandek yetib boradi.">Мы используем физику: магниты удерживают каждую конфету на своём месте, чтобы она добралась до вашего стола именно такой, какой мы её задумали.</p>
    </div>
-   <div class="vis rv"><div class="magnet"><i></i><i></i><i></i><img src="/media/top-chamoq.webp?v=6" alt="" loading="lazy"></div></div>
+   <div class="vis rv"><div class="magnet"><i></i><i></i><i></i><img src="/media/top-chamoq.webp?v=7" alt="" loading="lazy"></div></div>
   </div>
  </section>
 
@@ -49,9 +49,9 @@
    <h2 class="big rv" data-en="The box." data-uz="Quti.">Коробка.</h2>
    <p class="sub rv" data-en="Three colours. Drag to turn it." data-uz="Uch rang. Aylantirish uchun torting.">Три цвета. Потяните, чтобы повернуть.</p>
    <div class="seg rv" id="mvseg" role="group" aria-label="Цвет коробки" style="justify-content:center;margin:18px auto 0">
-    <button type="button" data-c="white" aria-pressed="false"><i style="--sw:#f1ece4"></i><span data-en="White" data-uz="Oq">Белая</span></button>
-    <button type="button" data-c="black" aria-pressed="true"><i style="--sw:#1c1d20"></i><span data-en="Black" data-uz="Qora">Чёрная</span></button>
-    <button type="button" data-c="red" aria-pressed="false"><i style="--sw:#c93a27"></i><span data-en="Red" data-uz="Qizil">Красная</span></button>
+    <button type="button" data-col="white" aria-pressed="false"><i style="--sw:#f1ece4"></i><span data-en="White" data-uz="Oq">Белая</span></button>
+    <button type="button" data-col="black" aria-pressed="true"><i style="--sw:#1c1d20"></i><span data-en="Black" data-uz="Qora">Чёрная</span></button>
+    <button type="button" data-col="red" aria-pressed="false"><i style="--sw:#c93a27"></i><span data-en="Red" data-uz="Qizil">Красная</span></button>
    </div>
    <model-viewer id="mvbox" class="rv" src="/models/box-black.glb" alt="3D-макет коробки DONA HIGH-END" camera-controls auto-rotate rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="1" exposure="1.05" camera-orbit="30deg 62deg auto" disable-zoom touch-action="pan-y"></model-viewer>
   </div>
@@ -106,7 +106,7 @@ $('#candies').innerHTML=HE.map((c,i)=>`<article class="candy" id="${c.k}" style=
   </div>
  </div>
  <div class="views rv">
-  <div class="vstage"><div class="spin"><img src="/media/still-${c.k}.webp?v=6" alt="${c.name}" loading="lazy" decoding="async"></div><div class="cut3d hide" data-k="${c.k}"><img src="/media/cut-${c.k}.webp?v=6" alt="${c.name} — разрез" loading="lazy" decoding="async"></div></div>
+  <div class="vstage"><div class="spin"><img src="/media/still-${c.k}.webp?v=7" alt="${c.name}" loading="lazy" decoding="async"></div><div class="cut3d hide" data-k="${c.k}"><img src="/media/cut-${c.k}.webp?v=7" alt="${c.name} — разрез" loading="lazy" decoding="async"></div></div>
   <div class="vtabs" role="group" aria-label="${c.name}"><button type="button" data-v="foil" aria-pressed="true" data-en="In foil" data-uz="Folgada">В фольге</button><button type="button" data-v="cut" aria-pressed="false" data-en="Cut" data-uz="Kesim">В разрезе</button></div>
  </div>
 </article>`).join('');
@@ -120,9 +120,8 @@ $$('.candy').forEach(a=>{
 
 /* ---------- mini shaking box ---------- */
 const PAT=['macadamia','walnuts','chamoq','pistachio','walnuts','pistachio','macadamia','chamoq','chamoq','macadamia','pistachio','walnuts'];
-$('#minibox .grid').innerHTML=PAT.map(k=>`<div class="slot full"><img src="/media/top-${k}.webp?v=6" alt="" loading="lazy"></div>`).join('');
+$('#minibox .grid').innerHTML=PAT.map(k=>`<div class="slot full"><img src="/media/top-${k}.webp?v=7" alt="" loading="lazy"></div>`).join('');
 
-document.querySelectorAll('#mvseg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#mvseg button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#mvbox').src='/models/box-'+b.dataset.c+'.glb'});
 /* ---------- quiet magnet click ---------- */
 let AC,MB;const clack=(d=0)=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();
  const go=()=>{if(!MB)return;const n=AC.createBufferSource(),g=AC.createGain();n.buffer=MB;g.gain.value=.35;n.connect(g);g.connect(AC.destination);n.start(AC.currentTime+d)};
@@ -134,14 +133,15 @@ try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&Array.isArray(s.
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
 const grid=$('#grid'),hbox=$('#hbox'),lid=$('#lid');
 grid.innerHTML=Array.from({length:SIZE},(_,i)=>`<button type="button" class="slot" data-i="${i}"><span class="num">${i+1}</span></button>`).join('');
-$('#flav').innerHTML=HE.map(c=>`<button type="button" class="fl" data-k="${c.k}" style="--c:${c.ui}"><span class="n"></span><img src="/media/top-${c.k}.webp?v=6" alt="" loading="lazy"><b>${c.name}</b></button>`).join('');
+$('#flav').innerHTML=HE.map(c=>`<button type="button" class="fl" data-k="${c.k}" style="--c:${c.ui}"><span class="n"></span><img src="/media/top-${c.k}.webp?v=7" alt="" loading="lazy"><b>${c.name}</b></button>`).join('');
 function render(anim){
  hbox.className='hbox '+st.col;lid.className='boxlid '+st.col;
+ {const mv=$('#mvbox'),u='/models/box-'+st.col+'.glb';if(mv&&mv.getAttribute('src')!==u)mv.setAttribute('src',u)}
  $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.col===st.col));
  $$('.slot',grid).forEach((s,i)=>{const k=st.box[i];s.classList.toggle('full',!!k);const c=HE.find(x=>x.k===k);
   s.setAttribute('aria-label',k?T('Убрать ','Remove ','Olib tashlash: ')+c.name:T('Пустая ячейка ','Empty place ','Bo‘sh joy ')+(i+1));
   const img=s.querySelector('img');
-  if(k){if(!img||img.dataset.k!==k){img&&img.remove();s.insertAdjacentHTML('beforeend',`<img src="/media/top-${k}.webp?v=6" alt="" data-k="${k}">`);
+  if(k){if(!img||img.dataset.k!==k){img&&img.remove();s.insertAdjacentHTML('beforeend',`<img src="/media/top-${k}.webp?v=7" alt="" data-k="${k}">`);
     if(anim===i&&!D.reduce)s.querySelector('img').animate([{transform:'translateY(-40%) scale(1.25)',opacity:0},{transform:'none',opacity:1}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'})}}
   else img&&img.remove()});
  const n=st.box.filter(Boolean).length;

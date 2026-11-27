@@ -52,6 +52,13 @@ try{const s=JSON.parse(localStorage.getItem('dona-contact2')||'{}');$('#c-name')
 const WALL={white:['#e9e3d8','#d9d2c4','#cfc8b8'],black:['#2a2c31','#1c1d20','#141518'],red:['#d8503c','#c93a27','#a82d1d']};
 function box3d(it){const col=['white','black','red'].includes(it.col)?it.col:'black';
  return `<div class="mvw"><model-viewer src="/models/box-${col}.glb" alt="DONA HIGH-END" camera-controls auto-rotate rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="1" exposure="1.05" camera-orbit="30deg 62deg auto" disable-zoom touch-action="pan-y"></model-viewer><p class="hint3">${T('Потяните, чтобы повернуть','Drag to turn','Aylantirish uchun torting')}</p></div>`}
+function initTurn(){document.querySelectorAll('[data-turn]').forEach(t=>{if(t._on)return;t._on=1;const im=t.querySelector('img'),n=36,src=i=>`/media/lsbox/${String(i).padStart(2,'0')}.webp`;
+ for(let i=0;i<n;i++){const p=new Image();p.src=src(i)}
+ let f=5,drag=0,x=0,idle=0;const set=()=>{im.src=src(((Math.round(f)%n)+n)%n)};
+ t.addEventListener('pointerdown',e=>{drag=1;x=e.clientX;t.setPointerCapture(e.pointerId)});
+ t.addEventListener('pointermove',e=>{if(!drag)return;f-=(e.clientX-x)/12;x=e.clientX;set()});
+ const up=()=>{drag=0;idle=performance.now()};t.addEventListener('pointerup',up);t.addEventListener('pointercancel',up);
+ if(!D.reduce){const iv=setInterval(()=>{if(!document.contains(t))return clearInterval(iv);if(!drag&&performance.now()-idle>2500){f+=1;set()}},140)}})}
 function init3d(){document.querySelectorAll('[data-3d]').forEach(sc=>{const cb=sc.querySelector('.cb');if(sc._on)return;sc._on=1;
  let rx=48,rz=-24,drag=0,px=0,py=0,t=0;const set=()=>cb.style.transform=`rotateX(${rx}deg) rotateZ(${rz}deg)`;set();
  sc.addEventListener('pointerdown',e=>{drag=1;px=e.clientX;py=e.clientY;sc.setPointerCapture(e.pointerId)});
@@ -66,10 +73,10 @@ function draw(){
    return `<div class="citem he" data-id="${it.id}">${box3d(it)}
     <div><h3>HIGH-END · ${n}/12</h3>${n<12?`<p class="warn">${T('Коробка не заполнена: нужно ровно 12 конфет.','The box is not full: exactly 12 candies are needed.','Quti to‘lmagan: aynan 12 ta konfet kerak.')} <a class="link" href="/high-end#build">${T('Дополнить','Complete it','To‘ldirish')}</a></p>`:''}<p>${T('Коробка','Box','Quti')}: ${T(...col)}</p><p>${Object.entries(cnt).map(([k,v])=>NM[k]+' × '+v).join(', ')}</p>${it.name?`<p>${T('Письмо для','Letter for','Maktub')}: ${it.name.replace(/[<>&]/g,'')}</p>`:''}<button class="x" type="button" data-rm>${T('Убрать','Remove','Olib tashlash')}</button></div>
     <div class="qty"><button type="button" data-q="-1">−</button><span>${it.qty}</span><button type="button" data-q="1">+</button></div></div>`}
-  return `<div class="citem" data-id="${it.id}"><div class="th" style="background:#f1efea"><img src="/media/ls-inside.webp" alt=""></div>
+  return `<div class="citem he" data-id="${it.id}"><div class="mvw lsturn" data-turn><img src="/media/lsbox/05.webp" alt="DONA LIGHT SIDE OF THE MOON" draggable="false"><p class="hint3">${T('Потяните, чтобы повернуть','Drag to turn','Aylantirish uchun torting')}</p></div>
    <div><h3>LIGHT SIDE OF THE MOON</h3><p>${T('Белая коробка: тёмная карамель, солёная карамель, макадамия','White box: dark caramel, salted caramel, macadamia','Oq quti: qora karamel, tuzli karamel, makadamiya')}</p><button class="x" type="button" data-rm>${T('Убрать','Remove','Olib tashlash')}</button></div>
    <div class="qty"><button type="button" data-q="-1">−</button><span>${it.qty}</span><button type="button" data-q="1">+</button></div></div>`}).join('');
- init3d();
+ init3d();initTurn();
  $('#send').disabled=a.some(it=>it.type==='he'&&it.box.filter(Boolean).length<12);
  $$('.citem').forEach(el=>{const id=el.dataset.id;el.querySelector('[data-rm]').onclick=()=>cart.remove(id);
   el.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const it=cart.get().find(x=>x.id===id);if(it)cart.qty(id,it.qty+ +b.dataset.q)})});
