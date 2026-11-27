@@ -73,6 +73,8 @@ module.exports = async (req, res) => {
     return { type: 'he', qty: int(it && it.qty, 1, 50, 1), col: COLORS[it && it.col] ? it.col : 'black', name: clean(it && it.name, 40), box };
   }).filter(it => it.type === 'lsm' || it.box.some(Boolean));
   if (!items.length) return res.status(400).json({ ok: false, error: 'empty cart' });
+  // a HIGH-END box is only ordered full: all 12 places filled
+  if (items.some(it => it.type === 'he' && it.box.filter(Boolean).length < SIZE)) return res.status(400).json({ ok: false, error: 'box must have 12 candies' });
 
   const o = { items, name: clean(b.name, 60), contact: clean(b.contact, 60), address: clean(b.address, 160), note: clean(b.note, 500), lang: clean(b.lang, 4) };
   const id = orderId();

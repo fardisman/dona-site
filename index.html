@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
-<link rel="preload" as="image" href="/media/still-macadamia.webp">
+<link rel="preload" as="image" href="/media/he-box.webp">
 </head>
 <body data-page="home">
 <main>
@@ -18,28 +18,21 @@
   <p class="where" data-en="Samarkand" data-uz="Samarqand">Самарканд</p>
   <h1><img src="/assets/logo-word.webp" alt="DONA"></h1>
   <p class="tag" data-en="Handmade chocolate." data-uz="Qo‘lda tayyorlangan shokolad.">Шоколад ручной работы.</p>
-  <div class="four" id="four"></div>
-  <p class="scrollhint" data-en="Two collections ↓" data-uz="Ikki to‘plam ↓">Две коллекции ↓</p>
+  <p class="sub" style="margin-top:14px" data-en="Every DONA piece is made by hand in Samarkand. Two collections — choose yours." data-uz="DONA ning har bir konfeti Samarqandda qo‘lda tayyorlanadi. Ikki to‘plam — o‘zingiznikini tanlang.">Каждая конфета DONA сделана вручную в Самарканде. Две коллекции — выберите свою.</p>
  </section>
 
- <section class="pad" id="lines">
-  <div class="wrap">
-   <div class="center rv">
-    <p class="kicker" data-en="Our collections" data-uz="Bizning to‘plamlar">Наши коллекции</p>
-    <h2 class="big" data-en="Two lines. One craft." data-uz="Ikki yo‘nalish. Bitta mahorat.">Две линейки. Одно мастерство.</h2>
-    <p class="sub" data-en="Every DONA piece is made by hand in Samarkand. Choose the collection you want to discover." data-uz="DONA ning har bir konfeti Samarqandda qo‘lda tayyorlanadi. Qaysi to‘plamni kashf etishni tanlang.">Каждая конфета DONA сделана вручную в Самарканде. Выберите коллекцию, которую хотите открыть.</p>
-   </div>
+ <section class="wrap lines-sec" id="lines">
    <div class="lines">
     <a class="line he rv" href="/high-end">
-     <div class="pic"><div class="spin" data-k="walnuts" data-size="s"></div></div>
+     <div class="pic"><img src="/media/he-box.webp" width="2400" height="1800" alt="Коробка HIGH-END с двенадцатью конфетами в фольге четырёх цветов" data-en-alt="HIGH-END box with twelve candies in four foil colours"></div>
      <div class="txt">
       <h3>HIGH-END</h3>
-      <p data-en="Four fillings, each in its own colour of foil. Build your own box of 12 and see every candy from the inside in 3D." data-uz="To‘rtta ichlik, har biri o‘z rangli folgasida. 12 talik qutingizni yig‘ing va har bir konfetni 3D da ichidan ko‘ring.">Четыре начинки — каждая в фольге своего цвета. Соберите свою коробку из 12 конфет и рассмотрите каждую в разрезе в 3D.</p>
+      <p data-en="Four fillings, each in its own colour of foil. Build your own box of 12 and see every candy cut in 3D." data-uz="To‘rtta ichlik, har biri o‘z rangli folgasida. 12 talik qutingizni yig‘ing va har bir konfetni kesimda ko‘ring.">Четыре начинки — каждая в фольге своего цвета. Соберите свою коробку из 12 конфет и рассмотрите каждую в разрезе.</p>
       <span class="go" data-en="Open HIGH-END" data-uz="HIGH-END ni ochish">Открыть HIGH-END</span>
      </div>
     </a>
     <a class="line lsm rv" href="/light-side">
-     <div class="pic"><img src="/media/ls-box.webp" alt="" loading="lazy" decoding="async"></div>
+     <div class="pic"><img src="/media/ls-box.webp" width="3200" height="2080" alt="Белая коробка LIGHT SIDE OF THE MOON" data-en-alt="White LIGHT SIDE OF THE MOON box"></div>
      <div class="txt">
       <h3>LIGHT SIDE OF THE MOON</h3>
       <p data-en="The new collection: three new flavours in one white box — round, square and a bar, each in its own foil." data-uz="Yangi to‘plam: bitta oq qutida uchta yangi ta’m — dumaloq, kvadrat va batoncha, har biri o‘z folgasida.">Новая коллекция: три новых вкуса в одной белой коробке — круглая, квадратная и батончик, каждая в своей фольге.</p>
@@ -47,7 +40,6 @@
      </div>
     </a>
    </div>
-  </div>
  </section>
 
  <section class="pad">
@@ -70,10 +62,5 @@
  </section>
 </main>
 <script src="/js/site.js"></script>
-<script>
-(function(){const D=window.DONA;
- D.$('#four').innerHTML=D.HE.map((c,i)=>`<figure><div class="spin" data-k="${c.k}" data-size="s" data-offset="${(i*1.5).toFixed(1)}"></div><figcaption>${c.name}</figcaption></figure>`).join('');
-})();
-</script>
 </body>
 </html>

@@ -16,7 +16,7 @@
  <header class="phead wrap center">
   <p class="kicker" data-en="Collection" data-uz="To‘plam">Коллекция</p>
   <h1 class="big serif" style="font-size:clamp(56px,9vw,120px);letter-spacing:.04em">HIGH-END</h1>
-  <p class="sub" data-en="Four fillings. Each in its own foil — and each worth seeing from the inside. Turn every candy in 3D, then build your own box." data-uz="To‘rtta ichlik. Har biri o‘z folgasida — va har birini ichidan ko‘rishga arziydi. Har bir konfetni 3D da aylantiring, so‘ng o‘z qutingizni yig‘ing.">Четыре начинки. Каждая — в своей фольге, и каждую стоит увидеть изнутри. Покрутите каждую конфету в 3D, а потом соберите свою коробку.</p>
+  <p class="sub" data-en="Four fillings. Each in its own foil — and each worth seeing from the inside. See every candy in foil and cut, then build your own box." data-uz="To‘rtta ichlik. Har biri o‘z folgasida — va har birini ichidan ko‘rishga arziydi. Har bir konfetni folgada va kesimda ko‘ring, so‘ng o‘z qutingizni yig‘ing.">Четыре начинки. Каждая — в своей фольге, и каждую стоит увидеть изнутри. Посмотрите каждую конфету в фольге и в разрезе, а потом соберите свою коробку.</p>
   <div class="row-acts" style="justify-content:center"><a class="btn gold" href="#build" data-en="Build a box" data-uz="Quti yig‘ish">Собрать коробку</a></div>
  </header>
 
@@ -60,13 +60,14 @@
      <div class="boxlid" id="lid"><div class="lm" role="img" aria-label="DONA"></div><p>MOMENTS TO SHARE<br>FLAVORS TO REMEMBER</p></div>
      <div class="hbox" id="hbox"><div class="grid" id="grid"></div></div>
      <p class="count" id="count" aria-live="polite"></p>
+     <p class="note" style="margin-top:6px" data-en="A box is ordered full — all 12 places must be filled." data-uz="Quti faqat to‘liq buyurtma qilinadi — 12 ta joyning hammasi to‘ldirilishi kerak.">Коробка заказывается только полной — нужно заполнить все 12 мест.</p>
     </div>
     <div>
      <h3 style="margin:0 0 14px;font-size:21px" data-en="Choose flavours" data-uz="Ta’mlarni tanlang">Выберите вкусы</h3>
      <div class="flav" id="flav"></div>
      <div class="field"><label for="nm-in" data-en="Name for the letter inside" data-uz="Ichidagi maktub uchun ism">Имя для письма внутри коробки</label><input id="nm-in" type="text" maxlength="40" autocomplete="off" placeholder="Например, Мадина" data-ph-en="For example, Madina" data-ph-uz="Masalan, Madina"></div>
      <div class="row-acts">
-      <button class="btn gold" type="button" id="b-add" data-en="Add box to cart" data-uz="Qutini savatga qo‘shish">Добавить коробку в корзину</button>
+      <button class="btn gold" type="button" id="b-add" data-en="Add box to cart" data-uz="Qutini savatga qo‘shish" disabled>Добавить коробку в корзину</button>
       <button class="btn ghost" type="button" id="b-rand" data-en="Surprise me" data-uz="Tasodifiy">Наугад</button>
       <button class="btn ghost" type="button" id="b-clear" data-en="Empty" data-uz="Tozalash">Очистить</button>
      </div>
@@ -76,7 +77,6 @@
  </section>
 </main>
 <script src="/js/site.js"></script>
-<script src="/js/cutviewer.js"></script>
 <script>
 (function(){
 const D=window.DONA,{$,$$,HE,T}=D;
@@ -87,21 +87,19 @@ $('#candies').innerHTML=HE.map((c,i)=>`<article class="candy" id="${c.k}" style=
   <h2 class="name">${c.name}</h2>
   <p class="desc" data-en="${c.en}" data-uz="${c.uz}">${c.ru}</p>
   <div class="acts">
-   <button class="btn ghost" type="button" data-v="cut" data-en="See it cut in 3D" data-uz="3D da kesimini ko‘rish">Смотреть в разрезе 3D</button>
+   <button class="btn ghost" type="button" data-v="cut" data-en="See it cut" data-uz="Kesimini ko‘rish">Смотреть в разрезе</button>
    <a class="btn" href="#build" data-en="Put in a box" data-uz="Qutiga solish">Положить в коробку</a>
   </div>
  </div>
  <div class="views rv">
-  <div class="vstage"><div class="spin" data-k="${c.k}" data-size="l"></div><div class="cut3d hide" data-k="${c.k}"></div></div>
-  <div class="vtabs" role="group" aria-label="${c.name}"><button type="button" data-v="foil" aria-pressed="true" data-en="In foil" data-uz="Folgada">В фольге</button><button type="button" data-v="cut" aria-pressed="false" data-en="Cut · 3D" data-uz="Kesim · 3D">В разрезе · 3D</button></div>
+  <div class="vstage"><div class="spin" data-k="${c.k}" data-size="l"></div><div class="cut3d hide" data-k="${c.k}"><img src="/media/cut-${c.k}.webp" alt="${c.name} — разрез" loading="lazy" decoding="async"></div></div>
+  <div class="vtabs" role="group" aria-label="${c.name}"><button type="button" data-v="foil" aria-pressed="true" data-en="In foil" data-uz="Folgada">В фольге</button><button type="button" data-v="cut" aria-pressed="false" data-en="Cut" data-uz="Kesim">В разрезе</button></div>
  </div>
 </article>`).join('');
-const YAW={macadamia:0,walnuts:0,chamoq:0,pistachio:0};
 $$('.candy').forEach(a=>{
  const k=a.id,spin=a.querySelector('.spin'),cut=a.querySelector('.cut3d');
  const show=v=>{const isCut=v==='cut';spin.classList.toggle('hide',isCut);cut.classList.toggle('hide',!isCut);
   a.querySelectorAll('.vtabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));
-  if(isCut&&!cut._viewer)cut._viewer=new CutViewer(cut,k,YAW[k]);
   if(spin._video){isCut?spin._video.pause():spin._video.play().catch(()=>{})}};
  a.querySelectorAll('[data-v]').forEach(b=>b.addEventListener('click',()=>{show(b.dataset.v);if(b.closest('.ctext'))a.querySelector('.vstage').scrollIntoView({behavior:'smooth',block:'center'})}));
 });
@@ -130,7 +128,7 @@ function render(anim){
  const n=st.box.filter(Boolean).length;
  $('#count').innerHTML=n===SIZE?T('Коробка собрана — <b>12 из 12</b>','Your box is full — <b>12 of 12</b>','Quti to‘ldi — <b>12 tadan 12</b>'):T(`В коробке <b>${n} из ${SIZE}</b>`,`<b>${n} of ${SIZE}</b> in the box`,`Qutida <b>${SIZE} tadan ${n}</b>`);
  $$('.fl').forEach(f=>{const c=st.box.filter(k=>k===f.dataset.k).length,el=f.querySelector('.n');el.textContent=c;el.classList.toggle('on',c>0)});
- $('#b-add').disabled=n===0;save()}
+ $('#b-add').disabled=n!==SIZE;$('#b-add').textContent=n===SIZE?T('Добавить коробку в корзину','Add box to cart','Qutini savatga qo‘shish'):T(`Заполните коробку: ${n} из ${SIZE}`,`Fill the box: ${n} of ${SIZE}`,`Qutini to‘ldiring: ${SIZE} tadan ${n}`);save()}
 function add(k){const i=st.box.findIndex(x=>!x);if(i<0){$('#count').animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:260});return}
  st.box[i]=k;st.seq.push({a:'add',k,s:i});render(i)}
 $$('.fl').forEach(f=>f.onclick=()=>add(f.dataset.k));
@@ -139,7 +137,7 @@ $$('.seg button').forEach(b=>b.onclick=()=>{st.col=b.dataset.col;render()});
 $('#b-clear').onclick=()=>{st.box=Array(SIZE).fill(null);st.seq.push({a:'clear'});render()};
 $('#b-rand').onclick=()=>{st.box=st.box.map(()=>HE[Math.floor(Math.random()*4)].k);st.seq.push({a:'clear'});st.box.forEach((k,i)=>st.seq.push({a:'add',k,s:i}));render()};
 $('#b-add').onclick=()=>{
- if(!st.box.some(Boolean))return;
+ if(st.box.filter(Boolean).length!==SIZE)return;
  D.cart.add({type:'he',col:st.col,box:st.box.slice(),seq:st.seq.slice(-120),name:($('#nm-in').value||'').trim().slice(0,40)});
  D.toast(`<span data-en="Box added to cart" data-uz="Quti savatga qo‘shildi">Коробка добавлена в корзину</span> <a href="/cart" data-en="Open cart →" data-uz="Savatni ochish →">Открыть корзину →</a>`);
  st={col:st.col,box:Array(SIZE).fill(null),seq:[]};$('#nm-in').value='';render()};
