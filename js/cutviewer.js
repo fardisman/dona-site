@@ -61,7 +61,10 @@ class CutViewer {
   window.DONA && DONA.setLang(DONA.lang);
   this.cv = host.querySelector('canvas'); this.bar = host.querySelector('.ld i');
   host.querySelectorAll('.zoom button').forEach(b => b.onclick = () => { this.zoom = Math.max(.45, Math.min(1.6, this.zoom * (b.dataset.z < 0 ? .82 : 1.22))); this.auto = false; this.draw(); });
-  this.load().catch(e => { host.querySelector('.ld span').textContent = (String(e && e.message || e) === 'webgl2' ? 'Ваш браузер не поддерживает 3D' : 'Не удалось загрузить 3D') + ' (' + String(e && e.message || e).slice(0, 60) + ')'; console.error(e); });
+  const fallback = () => { host.innerHTML = `<img src="/media/cut-${k}.webp" alt="" style="position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 20px 20px rgba(0,0,0,.55))">`; };
+  const probe = document.createElement('canvas').getContext('webgl2');
+  if (!probe) { fallback(); return; }
+  this.load().catch(e => { console.error(e); fallback(); });
  }
  async load() {
   const b = await fetchGz(`/models/cut-${this.k}.glb.gz`, p => this.bar.style.width = (p * 100).toFixed(0) + '%');
