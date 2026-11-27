@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HIGH-END — DONA</title>
+<meta name="description" content="Коллекция DONA HIGH-END: четыре начинки, каждая в своей фольге. Рассмотрите каждую конфету в разрезе в 3D и соберите свою коробку.">
+<meta name="theme-color" content="#1e0e06">
+<link rel="icon" href="/assets/logo-oval.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body data-page="he">
+<main>
+ <header class="phead wrap center">
+  <p class="kicker" data-en="Collection" data-uz="To‘plam">Коллекция</p>
+  <h1 class="big serif" style="font-size:clamp(56px,9vw,120px);letter-spacing:.04em">HIGH-END</h1>
+  <p class="sub" data-en="Four fillings. Each in its own foil — and each worth seeing from the inside. Turn every candy in 3D, then build your own box." data-uz="To‘rtta ichlik. Har biri o‘z folgasida — va har birini ichidan ko‘rishga arziydi. Har bir konfetni 3D da aylantiring, so‘ng o‘z qutingizni yig‘ing.">Четыре начинки. Каждая — в своей фольге, и каждую стоит увидеть изнутри. Покрутите каждую конфету в 3D, а потом соберите свою коробку.</p>
+  <div class="row-acts" style="justify-content:center"><a class="btn gold" href="#build" data-en="Build a box" data-uz="Quti yig‘ish">Собрать коробку</a></div>
+ </header>
+
+ <div class="wrap" id="candies"></div>
+
+ <section class="pad" id="story">
+  <div class="wrap duo">
+   <div class="rv">
+    <h2 class="big" data-en="Feel every piece before you taste it." data-uz="Har bir konfetni tatib ko‘rishdan oldin his qiling.">Ощутите каждую конфету раньше, чем попробуете.</h2>
+    <p class="sub" data-en="We created a box in which you feel every chocolate before you taste it." data-uz="Biz shunday quti yaratdik — unda har bir konfetni tatib ko‘rishingizdan oldin his qilasiz.">Мы создали коробку, в которой вы ощутите каждую конфету ещё до того, как её попробуете.</p>
+    <p class="sub" data-en="We use physics: magnets hold every chocolate in its place, so that it reaches your table exactly as we first imagined it." data-uz="Biz fizikadan foydalanamiz: magnitlar har bir konfetni o‘z joyida ushlab turadi — u dasturxoningizga biz o‘ylagandek yetib boradi.">Мы используем физику: магниты удерживают каждую конфету на своём месте, чтобы она добралась до вашего стола именно такой, какой мы её задумали.</p>
+   </div>
+   <div class="vis rv"><div class="magnet"><i></i><i></i><i></i><img src="/media/top-chamoq.webp" alt="" loading="lazy"></div></div>
+  </div>
+ </section>
+
+ <section class="pad" id="travel">
+  <div class="wrap duo">
+   <div class="vis rv"><div class="hbox black shake" id="minibox" aria-hidden="true"><div class="grid"></div></div></div>
+   <div class="rv">
+    <h2 class="big" data-en="No shaking can move them." data-uz="Hech qanday silkinish ularni qo‘zg‘ata olmaydi.">Никакая тряска им не страшна.</h2>
+    <p class="sub" data-en="Magnets hold every chocolate in its place, even when the box is shaken." data-uz="Quti silkinsa ham, magnitlar har bir konfetni o‘z joyida ushlab turadi.">Магниты держат каждую конфету на своём месте, даже когда коробку трясёт.</p>
+    <p class="sub" data-en="By car, by plane, by train or in a courier’s hands — your chocolates will reach your address in their original state." data-uz="Mashinada, samolyotda, poyezdda yoki kuryer qo‘lida — konfetlar manzilingizga asl holida yetib boradi.">В машине, в самолёте, в поезде или в руках курьера — конфеты доберутся до вашего адреса в первозданном виде.</p>
+   </div>
+  </div>
+ </section>
+
+ <section class="pad" id="build">
+  <div class="wrap">
+   <div class="rv">
+    <h2 class="big" data-en="Build your own box." data-uz="O‘z qutingizni yig‘ing.">Соберите свою коробку.</h2>
+    <p class="sub" data-en="Tap a flavour and it drops into the next place. Tap a piece in the box to take it out." data-uz="Ta’mni bosing — konfet keyingi uyachaga tushadi. Qutidagi konfetni olib tashlash uchun ustiga bosing.">Нажмите на вкус — конфета ляжет в следующую ячейку. Нажмите на конфету в коробке, чтобы убрать её.</p>
+   </div>
+   <div class="bwrap">
+    <div>
+     <div class="seg" role="group" aria-label="Цвет коробки">
+      <button type="button" data-col="white"><i style="--sw:#f1ece4"></i><span data-en="White" data-uz="Oq">Белая</span></button>
+      <button type="button" data-col="black"><i style="--sw:#1c1d20"></i><span data-en="Black" data-uz="Qora">Чёрная</span></button>
+      <button type="button" data-col="red"><i style="--sw:#c93a27"></i><span data-en="Red" data-uz="Qizil">Красная</span></button>
+     </div>
+     <div class="boxlid" id="lid"><div class="lm" role="img" aria-label="DONA"></div><p>MOMENTS TO SHARE<br>FLAVORS TO REMEMBER</p></div>
+     <div class="hbox" id="hbox"><div class="grid" id="grid"></div></div>
+     <p class="count" id="count" aria-live="polite"></p>
+    </div>
+    <div>
+     <h3 style="margin:0 0 14px;font-size:21px" data-en="Choose flavours" data-uz="Ta’mlarni tanlang">Выберите вкусы</h3>
+     <div class="flav" id="flav"></div>
+     <div class="field"><label for="nm-in" data-en="Name for the letter inside" data-uz="Ichidagi maktub uchun ism">Имя для письма внутри коробки</label><input id="nm-in" type="text" maxlength="40" autocomplete="off" placeholder="Например, Мадина" data-ph-en="For example, Madina" data-ph-uz="Masalan, Madina"></div>
+     <div class="row-acts">
+      <button class="btn gold" type="button" id="b-add" data-en="Add box to cart" data-uz="Qutini savatga qo‘shish">Добавить коробку в корзину</button>
+      <button class="btn ghost" type="button" id="b-rand" data-en="Surprise me" data-uz="Tasodifiy">Наугад</button>
+      <button class="btn ghost" type="button" id="b-clear" data-en="Empty" data-uz="Tozalash">Очистить</button>
+     </div>
+    </div>
+   </div>
+  </div>
+ </section>
+</main>
+<script src="/js/site.js"></script>
+<script src="/js/cutviewer.js"></script>
+<script>
+(function(){
+const D=window.DONA,{$,$$,HE,T}=D;
+/* ---------- the four candies: rotating in foil + the 3D cut ---------- */
+$('#candies').innerHTML=HE.map((c,i)=>`<article class="candy" id="${c.k}" style="--acc:${c.ui}">
+ <div class="ctext rv">
+  <p class="kicker" style="color:${c.ui}">${c.kick}</p>
+  <h2 class="name">${c.name}</h2>
+  <p class="desc" data-en="${c.en}" data-uz="${c.uz}">${c.ru}</p>
+  <div class="acts">
+   <button class="btn ghost" type="button" data-v="cut" data-en="See it cut in 3D" data-uz="3D da kesimini ko‘rish">Смотреть в разрезе 3D</button>
+   <a class="btn" href="#build" data-en="Put in a box" data-uz="Qutiga solish">Положить в коробку</a>
+  </div>
+ </div>
+ <div class="views rv">
+  <div class="vstage"><div class="spin" data-k="${c.k}" data-size="l"></div><div class="cut3d hide" data-k="${c.k}"></div></div>
+  <div class="vtabs" role="group" aria-label="${c.name}"><button type="button" data-v="foil" aria-pressed="true" data-en="In foil" data-uz="Folgada">В фольге</button><button type="button" data-v="cut" aria-pressed="false" data-en="Cut · 3D" data-uz="Kesim · 3D">В разрезе · 3D</button></div>
+ </div>
+</article>`).join('');
+const YAW={macadamia:0,walnuts:0,chamoq:0,pistachio:0};
+$$('.candy').forEach(a=>{
+ const k=a.id,spin=a.querySelector('.spin'),cut=a.querySelector('.cut3d');
+ const show=v=>{const isCut=v==='cut';spin.classList.toggle('hide',isCut);cut.classList.toggle('hide',!isCut);
+  a.querySelectorAll('.vtabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));
+  if(isCut&&!cut._viewer)cut._viewer=new CutViewer(cut,k,YAW[k]);
+  if(spin._video){isCut?spin._video.pause():spin._video.play().catch(()=>{})}};
+ a.querySelectorAll('[data-v]').forEach(b=>b.addEventListener('click',()=>{show(b.dataset.v);if(b.closest('.ctext'))a.querySelector('.vstage').scrollIntoView({behavior:'smooth',block:'center'})}));
+});
+
+/* ---------- mini shaking box ---------- */
+const PAT=['macadamia','walnuts','chamoq','pistachio','walnuts','pistachio','macadamia','chamoq','chamoq','macadamia','pistachio','walnuts'];
+$('#minibox .grid').innerHTML=PAT.map(k=>`<div class="slot full"><img src="/media/top-${k}.webp" alt="" loading="lazy"></div>`).join('');
+
+/* ---------- box builder ---------- */
+const SIZE=12,KEY='dona-builder2';
+let st={col:'black',box:Array(SIZE).fill(null),seq:[]};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&Array.isArray(s.box))st=Object.assign(st,s)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const grid=$('#grid'),hbox=$('#hbox'),lid=$('#lid');
+grid.innerHTML=Array.from({length:SIZE},(_,i)=>`<button type="button" class="slot" data-i="${i}"><span class="num">${i+1}</span></button>`).join('');
+$('#flav').innerHTML=HE.map(c=>`<button type="button" class="fl" data-k="${c.k}" style="--c:${c.ui}"><span class="n"></span><img src="/media/top-${c.k}.webp" alt="" loading="lazy"><b>${c.name}</b></button>`).join('');
+function render(anim){
+ hbox.className='hbox '+st.col;lid.className='boxlid '+st.col;
+ $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.col===st.col));
+ $$('.slot',grid).forEach((s,i)=>{const k=st.box[i];s.classList.toggle('full',!!k);const c=HE.find(x=>x.k===k);
+  s.setAttribute('aria-label',k?T('Убрать ','Remove ','Olib tashlash: ')+c.name:T('Пустая ячейка ','Empty place ','Bo‘sh joy ')+(i+1));
+  const img=s.querySelector('img');
+  if(k){if(!img||img.dataset.k!==k){img&&img.remove();s.insertAdjacentHTML('beforeend',`<img src="/media/top-${k}.webp" alt="" data-k="${k}" style="transform:rotate(${((i*73)%40)-20}deg)">`);
+    if(anim===i&&!D.reduce)s.querySelector('img').animate([{transform:'translateY(-40%) scale(1.25)',opacity:0},{transform:`rotate(${((i*73)%40)-20}deg)`,opacity:1}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'})}}
+  else img&&img.remove()});
+ const n=st.box.filter(Boolean).length;
+ $('#count').innerHTML=n===SIZE?T('Коробка собрана — <b>12 из 12</b>','Your box is full — <b>12 of 12</b>','Quti to‘ldi — <b>12 tadan 12</b>'):T(`В коробке <b>${n} из ${SIZE}</b>`,`<b>${n} of ${SIZE}</b> in the box`,`Qutida <b>${SIZE} tadan ${n}</b>`);
+ $$('.fl').forEach(f=>{const c=st.box.filter(k=>k===f.dataset.k).length,el=f.querySelector('.n');el.textContent=c;el.classList.toggle('on',c>0)});
+ $('#b-add').disabled=n===0;save()}
+function add(k){const i=st.box.findIndex(x=>!x);if(i<0){$('#count').animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:260});return}
+ st.box[i]=k;st.seq.push({a:'add',k,s:i});render(i)}
+$$('.fl').forEach(f=>f.onclick=()=>add(f.dataset.k));
+$$('.slot',grid).forEach(s=>s.onclick=()=>{const i=+s.dataset.i;if(!st.box[i])return;st.seq.push({a:'del',k:st.box[i],s:i});st.box[i]=null;render()});
+$$('.seg button').forEach(b=>b.onclick=()=>{st.col=b.dataset.col;render()});
+$('#b-clear').onclick=()=>{st.box=Array(SIZE).fill(null);st.seq.push({a:'clear'});render()};
+$('#b-rand').onclick=()=>{st.box=st.box.map(()=>HE[Math.floor(Math.random()*4)].k);st.seq.push({a:'clear'});st.box.forEach((k,i)=>st.seq.push({a:'add',k,s:i}));render()};
+$('#b-add').onclick=()=>{
+ if(!st.box.some(Boolean))return;
+ D.cart.add({type:'he',col:st.col,box:st.box.slice(),seq:st.seq.slice(-120),name:($('#nm-in').value||'').trim().slice(0,40)});
+ D.toast(`<span data-en="Box added to cart" data-uz="Quti savatga qo‘shildi">Коробка добавлена в корзину</span> <a href="/cart" data-en="Open cart →" data-uz="Savatni ochish →">Открыть корзину →</a>`);
+ st={col:st.col,box:Array(SIZE).fill(null),seq:[]};$('#nm-in').value='';render()};
+document.addEventListener('dona:lang',()=>render());
+render();
+if(location.hash&&location.hash.length>1){const t=document.getElementById(location.hash.slice(1));t&&setTimeout(()=>t.scrollIntoView(),300)}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Корзина — DONA</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1e0e06">
+<link rel="icon" href="/assets/logo-oval.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body data-page="cart">
+<main>
+ <section class="wrap" style="padding-top:120px;padding-bottom:100px">
+  <h1 class="big" data-en="Your cart" data-uz="Savatingiz">Ваша корзина</h1>
+  <div class="cartgrid" id="cg">
+   <div id="items"></div>
+   <aside class="panel" id="panel">
+    <h3 data-en="Place the order" data-uz="Buyurtma berish">Оформить заказ</h3>
+    <p class="note" style="margin-top:4px" data-en="We will contact you to confirm the order, the price and delivery." data-uz="Buyurtma, narx va yetkazib berishni tasdiqlash uchun siz bilan bog‘lanamiz.">Мы свяжемся с вами, чтобы подтвердить заказ, цену и доставку.</p>
+    <div class="field"><label for="c-name" data-en="Your name" data-uz="Ismingiz">Ваше имя</label><input id="c-name" type="text" autocomplete="name" maxlength="60"></div>
+    <div class="field"><label for="c-ct" data-en="Phone or Telegram" data-uz="Telefon yoki Telegram">Телефон или Telegram</label><input id="c-ct" type="text" inputmode="tel" autocomplete="tel" maxlength="60" placeholder="+998 __ ___ __ __"></div>
+    <div class="field"><label for="c-addr" data-en="Delivery address (optional)" data-uz="Yetkazish manzili (ixtiyoriy)">Адрес доставки (необязательно)</label><input id="c-addr" type="text" autocomplete="street-address" maxlength="160"></div>
+    <div class="field"><label for="c-note" data-en="Comment (optional)" data-uz="Izoh (ixtiyoriy)">Комментарий (необязательно)</label><textarea id="c-note" maxlength="500"></textarea></div>
+    <div class="row-acts"><button class="btn gold" type="button" id="send" style="width:100%" data-en="Send order" data-uz="Buyurtmani yuborish">Отправить заказ</button></div>
+    <p class="note" id="err" role="alert"></p>
+   </aside>
+  </div>
+  <div class="empty" id="empty" hidden>
+   <p style="font-size:22px;color:#fff;margin:0 0 6px" data-en="Your cart is empty" data-uz="Savatingiz bo‘sh">Корзина пока пустая</p>
+   <p data-en="Choose a collection to start." data-uz="Boshlash uchun to‘plamni tanlang.">Выберите коллекцию, чтобы начать.</p>
+   <div class="row-acts" style="justify-content:center"><a class="stk" href="/high-end">HIGH-END</a><a class="stk r" href="/light-side">LIGHT SIDE OF THE MOON</a></div>
+  </div>
+  <div class="done" id="done">
+   <p class="kicker" data-en="Thank you!" data-uz="Rahmat!">Спасибо!</p>
+   <p style="font-size:20px;margin:0" data-en="Your order has been received." data-uz="Buyurtmangiz qabul qilindi.">Ваш заказ принят.</p>
+   <p class="oid" id="oid"></p>
+   <p class="note" data-en="We will contact you soon. You can also write to us in Telegram." data-uz="Tez orada siz bilan bog‘lanamiz. Telegramda ham yozishingiz mumkin.">Мы скоро свяжемся с вами. Можно также написать нам в Telegram.</p>
+   <div class="row-acts" style="justify-content:center"><a class="btn" id="tg" href="https://t.me/dona_sales" target="_blank" rel="noopener" data-en="Write in Telegram" data-uz="Telegramda yozish">Написать в Telegram</a><a class="btn ghost" href="/" data-en="Home" data-uz="Bosh sahifa">На главную</a></div>
+  </div>
+ </section>
+</main>
+<script src="/js/site.js"></script>
+<script>
+(function(){
+const D=window.DONA,{$,$$,HE,T,BOXC,cart}=D;
+const NM=Object.fromEntries(HE.map(c=>[c.k,c.name]));
+try{const s=JSON.parse(localStorage.getItem('dona-contact2')||'{}');$('#c-name').value=s.name||'';$('#c-ct').value=s.ct||'';$('#c-addr').value=s.addr||''}catch(e){}
+function draw(){
+ const a=cart.get();$('#cg').hidden=!a.length;$('#empty').hidden=!!a.length||$('#done').classList.contains('on');
+ $('#items').innerHTML=a.map(it=>{
+  if(it.type==='he'){const n=it.box.filter(Boolean).length,cnt={};it.box.forEach(k=>{if(k)cnt[k]=(cnt[k]||0)+1});
+   const col=BOXC[it.col]||BOXC.black;
+   return `<div class="citem" data-id="${it.id}"><div class="th" style="background:${it.col==='white'?'#f1ece4':it.col==='red'?'#c93a27':'#1c1d20'}"><div class="g">${it.box.map(k=>k?`<img src="/media/top-${k}.webp" alt="">`:'<span></span>').join('')}</div></div>
+    <div><h3>HIGH-END · ${n}/12</h3><p>${T('Коробка','Box','Quti')}: ${T(...col)}</p><p>${Object.entries(cnt).map(([k,v])=>NM[k]+' × '+v).join(', ')}</p>${it.name?`<p>${T('Письмо для','Letter for','Maktub')}: ${it.name.replace(/[<>&]/g,'')}</p>`:''}<button class="x" type="button" data-rm>${T('Убрать','Remove','Olib tashlash')}</button></div>
+    <div class="qty"><button type="button" data-q="-1">−</button><span>${it.qty}</span><button type="button" data-q="1">+</button></div></div>`}
+  return `<div class="citem" data-id="${it.id}"><div class="th" style="background:#f1efea"><img src="/media/ls-box.webp" alt=""></div>
+   <div><h3>LIGHT SIDE OF THE MOON</h3><p>${T('Белая коробка: тёмная карамель, солёная карамель, макадамия','White box: dark caramel, salted caramel, macadamia','Oq quti: qora karamel, tuzli karamel, makadamiya')}</p><button class="x" type="button" data-rm>${T('Убрать','Remove','Olib tashlash')}</button></div>
+   <div class="qty"><button type="button" data-q="-1">−</button><span>${it.qty}</span><button type="button" data-q="1">+</button></div></div>`}).join('');
+ $$('.citem').forEach(el=>{const id=el.dataset.id;el.querySelector('[data-rm]').onclick=()=>cart.remove(id);
+  el.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const it=cart.get().find(x=>x.id===id);if(it)cart.qty(id,it.qty+ +b.dataset.q)})});
+}
+document.addEventListener('dona:cart',draw);document.addEventListener('dona:lang',draw);draw();
+
+function summary(id){const a=cart.get(),L=[T('Здравствуйте! Мой заказ DONA','Hello! My DONA order','Assalomu alaykum! Mening DONA buyurtmam')+(id?' № '+id:'')+':'];
+ a.forEach(it=>{if(it.type==='he'){const cnt={};it.box.forEach(k=>{if(k)cnt[k]=(cnt[k]||0)+1});L.push(`HIGH-END × ${it.qty}: `+Object.entries(cnt).map(([k,v])=>NM[k]+' × '+v).join(', '))}else L.push(`LIGHT SIDE OF THE MOON × ${it.qty}`)});
+ return L.join('\n')}
+$('#send').onclick=async()=>{
+ const name=$('#c-name').value.trim(),ct=$('#c-ct').value.trim(),addr=$('#c-addr').value.trim(),note=$('#c-note').value.trim(),err=$('#err');err.textContent='';
+ if(ct.replace(/\D/g,'').length<7&&!/^@?\w{4,}$/.test(ct)){err.textContent=T('Укажите телефон или Telegram, чтобы мы могли связаться с вами.','Please add a phone number or Telegram so we can reach you.','Siz bilan bog‘lanishimiz uchun telefon yoki Telegram kiriting.');$('#c-ct').focus();return}
+ try{localStorage.setItem('dona-contact2',JSON.stringify({name,ct,addr}))}catch(e){}
+ const b=$('#send');b.disabled=true;
+ const items=cart.get();
+ let id='';
+ try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,name,contact:ct,address:addr,note,lang:D.lang,tz:Intl.DateTimeFormat().resolvedOptions().timeZone||''})});
+  const j=await r.json();if(!r.ok||!j.ok)throw new Error(j.error||r.status);id=j.id}
+ catch(e){b.disabled=false;err.innerHTML=T('Не получилось отправить. Напишите нам в Telegram — ','Could not send. Please message us on Telegram — ','Yuborib bo‘lmadi. Telegramda yozing — ')+`<a class="link" href="https://t.me/dona_sales?text=${encodeURIComponent(summary(''))}" target="_blank" rel="noopener">@dona_sales</a>`;return}
+ $('#tg').href='https://t.me/dona_sales?text='+encodeURIComponent(summary(id));
+ $('#oid').textContent=id;$('#done').classList.add('on');cart.clear();$('#cg').hidden=true;$('#empty').hidden=true;b.disabled=false;scrollTo({top:0,behavior:'smooth'})};
+})();
+</script>
+</body>
+</html>
