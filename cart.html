@@ -42,6 +42,7 @@
   </div>
  </section>
 </main>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 <script src="/js/site.js"></script>
 <script>
 (function(){
@@ -49,12 +50,8 @@ const D=window.DONA,{$,$$,HE,T,BOXC,cart}=D;
 const NM=Object.fromEntries(HE.map(c=>[c.k,c.name]));
 try{const s=JSON.parse(localStorage.getItem('dona-contact2')||'{}');$('#c-name').value=s.name||'';$('#c-ct').value=s.ct||'';$('#c-addr').value=s.addr||''}catch(e){}
 const WALL={white:['#e9e3d8','#d9d2c4','#cfc8b8'],black:['#2a2c31','#1c1d20','#141518'],red:['#d8503c','#c93a27','#a82d1d']};
-function box3d(it){const w=WALL[it.col]||WALL.black,top=it.col==='white'?'#f4efe7':it.col==='red'?'#c93a27':'#1c1d20',ink=it.col==='white'?'#9a5a2c':it.col==='red'?'#fff4ea':'#d9a46c';
- return `<div class="sc" data-3d><div class="cb" style="--bg:${top};--w1:${w[0]};--w2:${w[1]};--w3:${w[2]};--ink:${ink}">
-  <div class="sh"></div>
-  <div class="lidtop ${it.col}"><div class="lm"></div><p>MOMENTS TO SHARE<br>FLAVORS TO REMEMBER</p></div>
-  <div class="wl bk"></div><div class="wl fr"></div><div class="wl lf"></div><div class="wl rt"></div>
- </div><p class="hint3">${T('Потяните, чтобы повернуть','Drag to turn','Aylantirish uchun torting')}</p></div>`}
+function box3d(it){const col=['white','black','red'].includes(it.col)?it.col:'black';
+ return `<div class="mvw"><model-viewer src="/models/box-${col}.glb" alt="DONA HIGH-END" camera-controls auto-rotate rotation-per-second="18deg" interaction-prompt="none" shadow-intensity="1" exposure="1.05" camera-orbit="30deg 62deg auto" disable-zoom touch-action="pan-y"></model-viewer><p class="hint3">${T('Потяните, чтобы повернуть','Drag to turn','Aylantirish uchun torting')}</p></div>`}
 function init3d(){document.querySelectorAll('[data-3d]').forEach(sc=>{const cb=sc.querySelector('.cb');if(sc._on)return;sc._on=1;
  let rx=48,rz=-24,drag=0,px=0,py=0,t=0;const set=()=>cb.style.transform=`rotateX(${rx}deg) rotateZ(${rz}deg)`;set();
  sc.addEventListener('pointerdown',e=>{drag=1;px=e.clientX;py=e.clientY;sc.setPointerCapture(e.pointerId)});
@@ -69,7 +66,7 @@ function draw(){
    return `<div class="citem he" data-id="${it.id}">${box3d(it)}
     <div><h3>HIGH-END · ${n}/12</h3>${n<12?`<p class="warn">${T('Коробка не заполнена: нужно ровно 12 конфет.','The box is not full: exactly 12 candies are needed.','Quti to‘lmagan: aynan 12 ta konfet kerak.')} <a class="link" href="/high-end#build">${T('Дополнить','Complete it','To‘ldirish')}</a></p>`:''}<p>${T('Коробка','Box','Quti')}: ${T(...col)}</p><p>${Object.entries(cnt).map(([k,v])=>NM[k]+' × '+v).join(', ')}</p>${it.name?`<p>${T('Письмо для','Letter for','Maktub')}: ${it.name.replace(/[<>&]/g,'')}</p>`:''}<button class="x" type="button" data-rm>${T('Убрать','Remove','Olib tashlash')}</button></div>
     <div class="qty"><button type="button" data-q="-1">−</button><span>${it.qty}</span><button type="button" data-q="1">+</button></div></div>`}
-  return `<div class="citem" data-id="${it.id}"><div class="th" style="background:#f1efea"><img src="/media/ls-box.webp?v=4" alt=""></div>
+  return `<div class="citem" data-id="${it.id}"><div class="th" style="background:#f1efea"><img src="/media/ls-box.webp?v=5" alt=""></div>
    <div><h3>LIGHT SIDE OF THE MOON</h3><p>${T('Белая коробка: тёмная карамель, солёная карамель, макадамия','White box: dark caramel, salted caramel, macadamia','Oq quti: qora karamel, tuzli karamel, makadamiya')}</p><button class="x" type="button" data-rm>${T('Убрать','Remove','Olib tashlash')}</button></div>
    <div class="qty"><button type="button" data-q="-1">−</button><span>${it.qty}</span><button type="button" data-q="1">+</button></div></div>`}).join('');
  init3d();

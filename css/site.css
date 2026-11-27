@@ -274,3 +274,8 @@ footer .credit{flex-basis:100%;margin:0;font-size:12px}
 .cb .lidtop.red .lm{background:#fff4ea}.cb .lidtop.white .lm{background:linear-gradient(100deg,#7a3c1a,#b66d3a 40%,#e0a46c 50%,#a85d2c 60%,#7a3c1a)}
 .cb .lidtop p{margin:0;font-size:5.5px;letter-spacing:.18em;line-height:1.5;text-align:center;color:var(--ink)}
 .cb .wl{height:26px}
+.mvw{position:relative;height:220px;border-radius:14px;background:radial-gradient(ellipse at 50% 60%,rgba(255,220,180,.10),transparent 70%)}
+.mvw model-viewer{width:100%;height:100%;--poster-color:transparent;background:transparent}
+.hbox .grid,#minibox .grid{gap:clamp(6px,1.4vw,14px)}
+.slot img{inset:-2%;width:104%;height:104%}
+.line .pic{padding:18px 18px 10px}

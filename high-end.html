@@ -29,7 +29,7 @@
     <p class="sub" data-en="We created a box in which you feel every chocolate before you taste it." data-uz="Biz shunday quti yaratdik — unda har bir konfetni tatib ko‘rishingizdan oldin his qilasiz.">Мы создали коробку, в которой вы ощутите каждую конфету ещё до того, как её попробуете.</p>
     <p class="sub" data-en="We use physics: magnets hold every chocolate in its place, so that it reaches your table exactly as we first imagined it." data-uz="Biz fizikadan foydalanamiz: magnitlar har bir konfetni o‘z joyida ushlab turadi — u dasturxoningizga biz o‘ylagandek yetib boradi.">Мы используем физику: магниты удерживают каждую конфету на своём месте, чтобы она добралась до вашего стола именно такой, какой мы её задумали.</p>
    </div>
-   <div class="vis rv"><div class="magnet"><i></i><i></i><i></i><img src="/media/top-chamoq.webp?v=4" alt="" loading="lazy"></div></div>
+   <div class="vis rv"><div class="magnet"><i></i><i></i><i></i><img src="/media/top-chamoq.webp?v=5" alt="" loading="lazy"></div></div>
   </div>
  </section>
 
@@ -92,7 +92,7 @@ $('#candies').innerHTML=HE.map((c,i)=>`<article class="candy" id="${c.k}" style=
   </div>
  </div>
  <div class="views rv">
-  <div class="vstage"><div class="spin"><img src="/media/still-${c.k}.webp?v=4" alt="${c.name}" loading="lazy" decoding="async"></div><div class="cut3d hide" data-k="${c.k}"><img src="/media/cut-${c.k}.webp?v=4" alt="${c.name} — разрез" loading="lazy" decoding="async"></div></div>
+  <div class="vstage"><div class="spin"><img src="/media/still-${c.k}.webp?v=5" alt="${c.name}" loading="lazy" decoding="async"></div><div class="cut3d hide" data-k="${c.k}"><img src="/media/cut-${c.k}.webp?v=5" alt="${c.name} — разрез" loading="lazy" decoding="async"></div></div>
   <div class="vtabs" role="group" aria-label="${c.name}"><button type="button" data-v="foil" aria-pressed="true" data-en="In foil" data-uz="Folgada">В фольге</button><button type="button" data-v="cut" aria-pressed="false" data-en="Cut" data-uz="Kesim">В разрезе</button></div>
  </div>
 </article>`).join('');
@@ -106,7 +106,7 @@ $$('.candy').forEach(a=>{
 
 /* ---------- mini shaking box ---------- */
 const PAT=['macadamia','walnuts','chamoq','pistachio','walnuts','pistachio','macadamia','chamoq','chamoq','macadamia','pistachio','walnuts'];
-$('#minibox .grid').innerHTML=PAT.map(k=>`<div class="slot full"><img src="/media/top-${k}.webp?v=4" alt="" loading="lazy"></div>`).join('');
+$('#minibox .grid').innerHTML=PAT.map(k=>`<div class="slot full"><img src="/media/top-${k}.webp?v=5" alt="" loading="lazy"></div>`).join('');
 
 /* ---------- quiet magnet click ---------- */
 let AC,MB;const clack=(d=0)=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();
@@ -119,15 +119,15 @@ try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&Array.isArray(s.
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
 const grid=$('#grid'),hbox=$('#hbox'),lid=$('#lid');
 grid.innerHTML=Array.from({length:SIZE},(_,i)=>`<button type="button" class="slot" data-i="${i}"><span class="num">${i+1}</span></button>`).join('');
-$('#flav').innerHTML=HE.map(c=>`<button type="button" class="fl" data-k="${c.k}" style="--c:${c.ui}"><span class="n"></span><img src="/media/top-${c.k}.webp?v=4" alt="" loading="lazy"><b>${c.name}</b></button>`).join('');
+$('#flav').innerHTML=HE.map(c=>`<button type="button" class="fl" data-k="${c.k}" style="--c:${c.ui}"><span class="n"></span><img src="/media/top-${c.k}.webp?v=5" alt="" loading="lazy"><b>${c.name}</b></button>`).join('');
 function render(anim){
  hbox.className='hbox '+st.col;lid.className='boxlid '+st.col;
  $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.col===st.col));
  $$('.slot',grid).forEach((s,i)=>{const k=st.box[i];s.classList.toggle('full',!!k);const c=HE.find(x=>x.k===k);
   s.setAttribute('aria-label',k?T('Убрать ','Remove ','Olib tashlash: ')+c.name:T('Пустая ячейка ','Empty place ','Bo‘sh joy ')+(i+1));
   const img=s.querySelector('img');
-  if(k){if(!img||img.dataset.k!==k){img&&img.remove();s.insertAdjacentHTML('beforeend',`<img src="/media/top-${k}.webp?v=4" alt="" data-k="${k}" style="transform:rotate(${((i*73)%40)-20}deg)">`);
-    if(anim===i&&!D.reduce)s.querySelector('img').animate([{transform:'translateY(-40%) scale(1.25)',opacity:0},{transform:`rotate(${((i*73)%40)-20}deg)`,opacity:1}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'})}}
+  if(k){if(!img||img.dataset.k!==k){img&&img.remove();s.insertAdjacentHTML('beforeend',`<img src="/media/top-${k}.webp?v=5" alt="" data-k="${k}">`);
+    if(anim===i&&!D.reduce)s.querySelector('img').animate([{transform:'translateY(-40%) scale(1.25)',opacity:0},{transform:'none',opacity:1}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'})}}
   else img&&img.remove()});
  const n=st.box.filter(Boolean).length;
  $('#count').innerHTML=n===SIZE?T('Коробка собрана — <b>12 из 12</b>','Your box is full — <b>12 of 12</b>','Quti to‘ldi — <b>12 tadan 12</b>'):T(`В коробке <b>${n} из ${SIZE}</b>`,`<b>${n} of ${SIZE}</b> in the box`,`Qutida <b>${SIZE} tadan ${n}</b>`);
