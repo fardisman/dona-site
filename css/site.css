@@ -334,3 +334,10 @@ footer .credit{flex-basis:100%;margin:0;font-size:12px}
  .lsdots i.on{background:var(--gold);transform:scale(1.25)}
 }
 @media(min-width:821px){.lsdots{display:none}}
+/* HIGH-END: candies in foil and cut gently alive */
+.vstage .spin img,.vstage .cut3d img{animation:lpj 3.4s ease-in-out infinite;--r:.9deg;transform-origin:50% 60%}
+.candy:nth-child(2) .vstage img{animation-delay:.7s;--r:-.8deg}
+.candy:nth-child(3) .vstage img{animation-delay:1.4s;--r:1deg}
+.candy:nth-child(4) .vstage img{animation-delay:2.1s;--r:-1deg}
+.vstage .cut3d img{animation-delay:1.1s}
+@media(prefers-reduced-motion:reduce){.vstage img{animation:none}}
