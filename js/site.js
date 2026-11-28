@@ -111,14 +111,14 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
 
 /* ---------- music: Debussy, faded in and out ---------- */
 const TRACK = 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/be/Clair_de_lune_%28Claude_Debussy%29_Suite_bergamasque.ogg/Clair_de_lune_%28Claude_Debussy%29_Suite_bergamasque.ogg.mp3';
-let EL = null, fadeT = 0;
+let EL = null, fadeT = 0, waiting = false;
 const mus = $('#mus');
 function fade(v, ms, done) { clearInterval(fadeT); const a = EL.volume, t0 = performance.now(); fadeT = setInterval(() => { const k = Math.min(1, (performance.now() - t0) / ms); EL.volume = Math.max(0, Math.min(1, a + (v - a) * k)); if (k >= 1) { clearInterval(fadeT); done && done(); } }, 40); }
 function music(on) {
  mus.setAttribute('aria-pressed', on);
  try { sessionStorage.setItem('dona-music', on ? '1' : '0'); } catch (e) {}
- if (on) { if (!EL) { EL = new Audio(TRACK); EL.loop = true; EL.volume = 0; } EL.play().then(() => fade(.55, 1500)).catch(() => mus.setAttribute('aria-pressed', false)); }
- else if (EL) fade(0, 600, () => EL.pause());
+ if (on) { if (!EL) { EL = new Audio(TRACK); EL.loop = true; EL.volume = 0; EL.preload = 'auto'; } EL.play().then(() => { waiting = false; fade(.55, 1500); }).catch(() => { waiting = true; }); }
+ else { waiting = false; if (EL) fade(0, 600, () => EL.pause()); }
 }
 mus.onclick = () => music(mus.getAttribute('aria-pressed') !== 'true');
 
@@ -167,6 +167,13 @@ function reveal() {
 window.DONA = {$, $$, T, HE, BOXC, cart, toast, reduce, spins, get lang() { return lang; }, setLang, collect};
 document.addEventListener('DOMContentLoaded', () => {
  spins(); reveal(); collect(); setLang(lang);
- try { if (sessionStorage.getItem('dona-music') === '1') { const go = () => { music(true); removeEventListener('pointerdown', go); }; addEventListener('pointerdown', go, {once: true}); } } catch (e) {}
+ /* music starts by itself; if the browser blocks sound until the first touch, it starts on the first touch, click, key or scroll */
+ let pref = '1'; try { pref = sessionStorage.getItem('dona-music') || '1'; } catch (e) {}
+ if (pref === '1') {
+  music(true);
+  const evs = ['pointerdown', 'keydown', 'touchstart', 'wheel', 'scroll'];
+  const go = e => { if (e && e.target && e.target.closest && e.target.closest('#mus')) return; if (waiting && mus.getAttribute('aria-pressed') === 'true') music(true); evs.forEach(v => removeEventListener(v, go, true)); };
+  evs.forEach(v => addEventListener(v, go, {capture: true, passive: true}));
+ }
 });
 })();
