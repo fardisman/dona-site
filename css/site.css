@@ -302,3 +302,14 @@ footer .credit{flex-basis:100%;margin:0;font-size:12px}
 .lines-sec .line p{font-size:14.5px;margin:8px 0 14px}
 .lines-sec .line .go{font-size:15px}
 .lines-sec .line.he .pic{padding:30px 64px 10px}.lines-sec .line.lsm .pic{padding:30px 30px 10px}
+/* home cards: half again */
+.lines-sec .lines{max-width:400px;gap:12px}
+.lines-sec .line{border-radius:16px}
+.lines-sec .line .pic{padding:12px 14px 2px}
+.lines-sec .line.he .pic{padding:14px 34px 4px}
+.lines-sec .line.lsm .pic{padding:14px 14px 4px}
+.lines-sec .line .txt{padding:6px 12px 12px}
+.lines-sec .line h3{font-size:15px;letter-spacing:.03em}
+.lines-sec .line p{font-size:11px;line-height:1.35;margin:4px 0 8px}
+.lines-sec .line .go{font-size:11.5px;gap:6px}
+@media(max-width:760px){.lines-sec .lines{grid-template-columns:1fr 1fr;max-width:400px}}
