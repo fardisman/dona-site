@@ -9,7 +9,7 @@
 <link rel="icon" href="/assets/logo-oval.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css?v=16">
+<link rel="stylesheet" href="/css/site.css?v=17">
 <link rel="preload" as="image" href="/media/ls-box.webp?v=7">
 </head>
 <body data-page="lsm">
@@ -62,6 +62,9 @@ $('#lsrow').innerHTML=LS.map(x=>`<div class="lsc rv" style="--c:${x.c}" tabindex
  <h3 data-en="${x.en[0]}" data-uz="${x.uz[0]}">${x.ru[0]}</h3>
  <p data-en="${x.en[1]}" data-uz="${x.uz[1]}">${x.ru[1]}</p>
 </div>`).join('');
+{const row=$('#lsrow'),cards=$$('.lsc',row);row.insertAdjacentHTML('afterend','<div class="lsdots" aria-hidden="true">'+cards.map(()=>'<i></i>').join('')+'</div>');
+ const dots=$$('.lsdots i');const upd=()=>{const c=row.scrollLeft+row.clientWidth/2;let b=0,bd=1e9;cards.forEach((k,i)=>{const d=Math.abs(k.offsetLeft+k.offsetWidth/2-c);if(d<bd){bd=d;b=i}});dots.forEach((d,i)=>d.classList.toggle('on',i===b))};
+ row.addEventListener('scroll',upd,{passive:true});upd();}
 $$('.lsc').forEach(c=>{c.onclick=()=>c.classList.toggle('flip');c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.classList.toggle('flip')}}});
 let q=1;const qv=$('#qv');
 $("#qm").onclick=()=>{q=Math.max(1,q-1);qv.textContent=q};

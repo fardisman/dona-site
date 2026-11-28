@@ -322,3 +322,15 @@ footer .credit{flex-basis:100%;margin:0;font-size:12px}
 .line .pic{display:grid;place-items:center;overflow:hidden}.line.he .pic .lsset{height:100%;width:auto;max-width:100%}
 .line.he .pic .lsset{height:auto;width:72%}.lines-sec .line.he .pic{padding:10px 14px 4px}
 .line .pic .lsset .lp{height:auto;max-height:none}
+/* mobile: LS flavours as a swipe carousel */
+@media(max-width:820px){
+ .lsrow{display:flex;grid-template-columns:none;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 9% 8px;margin-inline:calc(-1*var(--gut,20px));scrollbar-width:none}
+ .lsrow::-webkit-scrollbar{display:none}
+ .lsrow .lsc{flex:0 0 82%;scroll-snap-align:center;padding:14px 14px 18px}
+ .lsrow .lsc .pic{width:62%}
+ .lsrow .lsc h3{font-size:26px}
+ .lsdots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+ .lsdots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);transition:background .3s,transform .3s}
+ .lsdots i.on{background:var(--gold);transform:scale(1.25)}
+}
+@media(min-width:821px){.lsdots{display:none}}
